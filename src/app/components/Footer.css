@@ -1,0 +1,8 @@
+.footer_container {
+    height: 58px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #111827;
+    padding: 0 32px;
+}
