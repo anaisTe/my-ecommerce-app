@@ -1,9 +1,9 @@
 'use client';
-
-import { useSearchParams } from 'next/navigation';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
+import CheckoutForm from './components/CheckoutForm';
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 // Inicializa Stripe con tu clave pública
 const stripePromise = loadStripe('pk_test_51IcrnOBrqiH1c6UnLnO6iAKNukWxYo0tnvh2ush2HPnGAKEkfA7wYqCSYEuZSdaCKgHts5JNTnUR3vkUIUxwd2jK0015sBarJw');
@@ -28,7 +28,9 @@ const CheckoutPage = () => {
             <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
                 <div className="w-full h-full">
                     {/* Pasar los datos del producto a CheckoutForm */}
-                    <CheckoutForm priceMonthly={price} productName={title} />
+                    <Suspense fallback={<p>Cargando...</p>}>
+                        <CheckoutForm priceItem={price} productNameItem={title} />
+                    </Suspense>
                 </div>
             </div>
         </Elements>
